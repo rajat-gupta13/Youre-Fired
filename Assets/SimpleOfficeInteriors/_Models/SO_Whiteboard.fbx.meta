@@ -1,0 +1,179 @@
+fileFormatVersion: 2
+guid: cf29ae03266467f4ca6c295952d0ee76
+timeCreated: 1459814733
+licenseType: Store
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: SO_Whiteboard
+    100002: //RootNode
+    100004: shard1
+    100006: shard10
+    100008: shard11
+    100010: shard12
+    100012: shard13
+    100014: shard14
+    100016: shard15
+    100018: shard16
+    100020: shard2
+    100022: shard3
+    100024: shard4
+    100026: shard5
+    100028: shard6
+    100030: shard7
+    100032: shard8
+    100034: shard9
+    100036: solidShatter1
+    400000: SO_Whiteboard
+    400002: //RootNode
+    400004: shard1
+    400006: shard10
+    400008: shard11
+    400010: shard12
+    400012: shard13
+    400014: shard14
+    400016: shard15
+    400018: shard16
+    400020: shard2
+    400022: shard3
+    400024: shard4
+    400026: shard5
+    400028: shard6
+    400030: shard7
+    400032: shard8
+    400034: shard9
+    400036: solidShatter1
+    2300000: SO_Whiteboard
+    2300002: //RootNode
+    2300004: shard1
+    2300006: shard10
+    2300008: shard11
+    2300010: shard12
+    2300012: shard13
+    2300014: shard14
+    2300016: shard15
+    2300018: shard16
+    2300020: shard2
+    2300022: shard3
+    2300024: shard4
+    2300026: shard5
+    2300028: shard6
+    2300030: shard7
+    2300032: shard8
+    2300034: shard9
+    3300000: SO_Whiteboard
+    3300002: //RootNode
+    3300004: shard1
+    3300006: shard10
+    3300008: shard11
+    3300010: shard12
+    3300012: shard13
+    3300014: shard14
+    3300016: shard15
+    3300018: shard16
+    3300020: shard2
+    3300022: shard3
+    3300024: shard4
+    3300026: shard5
+    3300028: shard6
+    3300030: shard7
+    3300032: shard8
+    3300034: shard9
+    4300000: SO_Whiteboard
+    4300002: shard3
+    4300004: shard4
+    4300006: shard6
+    4300008: shard7
+    4300010: shard8
+    4300012: shard9
+    4300014: shard10
+    4300016: shard11
+    4300018: shard12
+    4300020: shard13
+    4300022: shard14
+    4300024: shard1
+    4300026: shard15
+    4300028: shard2
+    4300030: shard16
+    4300032: shard5
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 10
+    normalImportMode: 1
+    tangentImportMode: 1
+    normalCalculationMode: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
