@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour
@@ -13,17 +15,53 @@ public class PlayerController : MonoBehaviour
     private float radius = 1.0F;
     [SerializeField]
     private float power = 10.0F;
+    [SerializeField]
+    private Camera cam;
+    [SerializeField]
+    private LayerMask mask;
+    [SerializeField]
+    private Text damageText;
+    [SerializeField]
+    private Text timerText;
 
+    public static int currentDamages = 0;
+    [SerializeField]
+    private float timer = 90f;
+    //private int highestDamages;
+
+    [SerializeField]
+    private Transform objectHolder;
+    [SerializeField]
+    private float throwPower = 5f;
+    [SerializeField]
+    private Font textFont;
+
+    public GameObject coinPrefab;
+
+
+    private bool objectPicked = false;
+    private GameObject pickedObject;
     // Component caching
     private PlayerMotor motor;
 
     void Start()
     {
+        currentDamages = 0;
+        damageText.font = textFont;
+        timerText.font = textFont;
+        damageText.text = "Damages: $" + currentDamages.ToString();
         motor = GetComponent<PlayerMotor>();
     }
 
     void Update()
     {
+        timer -= Time.deltaTime;
+        timerText.text = "Time Left: " + Mathf.Round(timer).ToString("00");
+
+        if (timer <= 0)
+        {
+            SceneManager.LoadScene(3);
+        }
         //if (PauseMenu.IsOn)
         //{
         //    if (Cursor.lockState != CursorLockMode.None)
@@ -36,10 +74,10 @@ public class PlayerController : MonoBehaviour
         //    return;
         //}
 
-        //if (Cursor.lockState != CursorLockMode.Locked)
-        //{
-        //    Cursor.lockState = CursorLockMode.Locked;
-        //}
+        if (Cursor.lockState != CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
 
         //Calculate movement velocity as a 3D vector
         float _xMov = Input.GetAxis("Horizontal");
@@ -72,13 +110,54 @@ public class PlayerController : MonoBehaviour
         //Apply camera rotation
         motor.RotateCamera(_cameraRotationX);
 
+        if (Input.GetButtonDown("Fire1") && !objectPicked)
+        {
+            PickObject();
+        }
+        else if (Input.GetButtonDown("Fire1") && objectPicked)
+        {
+            ThrowObject();
+        }
+    }
+
+    private void PickObject()
+    {
+        RaycastHit _hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, 3, mask))
+        {
+            if (_hit.collider.tag == "Interactable")
+            {
+                objectPicked = true;
+                pickedObject = _hit.collider.gameObject;
+                _hit.collider.gameObject.transform.position = objectHolder.position;
+                _hit.collider.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                _hit.collider.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                _hit.collider.gameObject.transform.SetParent(objectHolder);
+            }
+        }
+    }
+
+    private void ThrowObject()
+    {
+        pickedObject.transform.parent = null;
+        objectPicked = false;
+        pickedObject.GetComponent<Rigidbody>().useGravity = true;
+        pickedObject.GetComponent<Rigidbody>().isKinematic = false;
+        pickedObject.GetComponent<ObjectShatter>().isThrown = true;
+        pickedObject.GetComponent<Rigidbody>().AddForce(cam.transform.forward * throwPower);
     }
 
     public IEnumerator DestroyObject(GameObject current, GameObject shatter)
     {
+        shatter.transform.position = current.transform.position;
+        currentDamages += current.GetComponent<ObjectShatter>().damageValue;
+        if (currentDamages > PlayerPrefs.GetInt("HighScore", 0))
+        {
+            PlayerPrefs.SetInt("HighScore", currentDamages);
+        }
         current.SetActive(false);
         shatter.SetActive(true);
-        Vector3 explosionPos = transform.position;
+        Vector3 explosionPos = shatter.transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
         foreach (Collider hit in colliders)
         {
@@ -91,6 +170,12 @@ public class PlayerController : MonoBehaviour
                 rb.useGravity = true;
             }
         }
+        int numberOfCoins = Random.Range(3, 9);
+        for (int i = 0; i < numberOfCoins; i++)
+        {
+            Instantiate(coinPrefab, new Vector3(shatter.transform.position.x, shatter.transform.position.y + 0.5f, shatter.transform.position.z), Quaternion.identity);
+        }
+        damageText.text = "Damages: $" + currentDamages.ToString();
         yield return null;
     }
 

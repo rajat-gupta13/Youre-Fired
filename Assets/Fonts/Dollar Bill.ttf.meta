@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 41971178da5d742499b05b74374f86e1
+timeCreated: 1523042390
+licenseType: Pro
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Dollar Bill
+  fontNames:
+  - Dollar Bill
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 00fdad3b729c21a409832adf387b9203, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

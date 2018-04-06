@@ -295,9 +295,11 @@ GameObject:
   - component: {fileID: 33627152364417912}
   - component: {fileID: 23105493213905320}
   - component: {fileID: 64946512141667372}
+  - component: {fileID: 54259894548151822}
+  - component: {fileID: 114653431287919154}
   m_Layer: 0
   m_Name: SO_Whiteboard
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1393,6 +1395,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &54259894548151822
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1680030491030562}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &54323067618749338
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -1811,3 +1828,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: cf29ae03266467f4ca6c295952d0ee76, type: 3}
+--- !u!114 &114653431287919154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1680030491030562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db32642c3fb29d4b9cfbe7d97c77884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isThrown: 0
+  current: {fileID: 1680030491030562}
+  shatter: {fileID: 1576995936883644}
+  damageValue: 75

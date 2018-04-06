@@ -105,9 +105,11 @@ GameObject:
   - component: {fileID: 33323691265086396}
   - component: {fileID: 23992416332679606}
   - component: {fileID: 64110296874017212}
+  - component: {fileID: 54914975560070926}
+  - component: {fileID: 114645856405180624}
   m_Layer: 0
   m_Name: SO_WaterCooler_01
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -665,6 +667,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &54914975560070926
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1427426889706434}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &54990960281246218
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -778,3 +795,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300010, guid: 1996c996707a8644fa6eea13e323df7b, type: 3}
+--- !u!114 &114645856405180624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1427426889706434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db32642c3fb29d4b9cfbe7d97c77884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isThrown: 0
+  current: {fileID: 1427426889706434}
+  shatter: {fileID: 1047559525366786}
+  damageValue: 75

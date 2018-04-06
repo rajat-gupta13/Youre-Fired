@@ -181,9 +181,11 @@ GameObject:
   - component: {fileID: 33001848827180464}
   - component: {fileID: 23256186047842238}
   - component: {fileID: 64866981559708612}
+  - component: {fileID: 54998430612954032}
+  - component: {fileID: 114258080100549124}
   m_Layer: 0
   m_Name: SO_CarboardBox_02
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -771,6 +773,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &54998430612954032
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1826284320953876}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &64094422817115364
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -883,3 +900,18 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300008, guid: 4d81d042e6b485346a3de26063e512e3, type: 3}
+--- !u!114 &114258080100549124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1826284320953876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db32642c3fb29d4b9cfbe7d97c77884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isThrown: 0
+  current: {fileID: 1826284320953876}
+  shatter: {fileID: 1603149816400262}
+  damageValue: 25
