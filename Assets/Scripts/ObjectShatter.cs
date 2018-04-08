@@ -28,19 +28,19 @@ public class ObjectShatter : MonoBehaviour {
     {
         if ((collision.gameObject.tag == "Player") && !hasCollided)
         {
-            Debug.Log("Player Collided with " + this.gameObject.name);
+            //Debug.Log("Player Collided with " + this.gameObject.name);
             hasCollided = true;
             StartCoroutine(player.GetComponent<PlayerController>().DestroyObject(current, shatter));
         }
         else if ((collision.gameObject.tag == "Wall") && isThrown && !hasCollided)
         {
-            Debug.Log("Thrown on wall");
+            //Debug.Log("Thrown on wall");
             hasCollided = true;
             StartCoroutine(player.GetComponent<PlayerController>().DestroyObject(current, shatter));
         }
         else if ((collision.gameObject.tag == "Floor") && isThrown && !hasCollided)
         {
-            Debug.Log("Thrown on floor");
+            //Debug.Log("Thrown on floor");
             hasCollided = true;
             StartCoroutine(player.GetComponent<PlayerController>().DestroyObject(current, shatter));
         }
