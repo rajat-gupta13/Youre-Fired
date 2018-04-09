@@ -26,22 +26,25 @@ public class ObjectShatter : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((collision.gameObject.tag == "Player") && !hasCollided)
+        if ((collision.gameObject.tag == "Player") && !hasCollided && player.GetComponent<PlayerController>().fullSpeed)
         {
             //Debug.Log("Player Collided with " + this.gameObject.name);
             hasCollided = true;
+            //GetComponent<AudioSource>().Play();
             StartCoroutine(player.GetComponent<PlayerController>().DestroyObject(current, shatter));
         }
         else if ((collision.gameObject.tag == "Wall") && isThrown && !hasCollided)
         {
             //Debug.Log("Thrown on wall");
             hasCollided = true;
+            //GetComponent<AudioSource>().Play();
             StartCoroutine(player.GetComponent<PlayerController>().DestroyObject(current, shatter));
         }
         else if ((collision.gameObject.tag == "Floor") && isThrown && !hasCollided)
         {
             //Debug.Log("Thrown on floor");
             hasCollided = true;
+            //GetComponent<AudioSource>().Play();
             StartCoroutine(player.GetComponent<PlayerController>().DestroyObject(current, shatter));
         }
     }

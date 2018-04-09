@@ -37,9 +37,10 @@ public class PlayerController : MonoBehaviour
     private Font textFont;
 
     public GameObject coinPrefab;
-
+    public bool fullSpeed = false;
 
     private bool objectPicked = false;
+    private bool buttonPressed = false;
     private GameObject pickedObject;
     // Component caching
     private PlayerMotor motor;
@@ -89,7 +90,10 @@ public class PlayerController : MonoBehaviour
         // Final movement vector
         Vector3 _velocity = (_movHorizontal + _movVertical) * speed;
 
-    
+        if (_velocity.magnitude > 9)
+            fullSpeed = true;
+        else
+            fullSpeed = false;
 
         //Apply movement
         motor.Move(_velocity);
@@ -134,6 +138,10 @@ public class PlayerController : MonoBehaviour
                 _hit.collider.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 _hit.collider.gameObject.transform.SetParent(objectHolder);
             }
+            else if (_hit.collider.tag == "Button" && !buttonPressed)
+            {
+                Debug.Log("Button Presed");
+            }
         }
     }
 
@@ -157,6 +165,7 @@ public class PlayerController : MonoBehaviour
         }
         current.SetActive(false);
         shatter.SetActive(true);
+        shatter.GetComponent<AudioSource>().Play();
         Vector3 explosionPos = shatter.transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
         foreach (Collider hit in colliders)
@@ -175,8 +184,19 @@ public class PlayerController : MonoBehaviour
         {
             Instantiate(coinPrefab, new Vector3(shatter.transform.position.x, shatter.transform.position.y + 0.5f, shatter.transform.position.z), Quaternion.identity);
         }
+        StartCoroutine(DisableShardPhysics(shatter));
         damageText.text = "Damages: $" + currentDamages.ToString();
         yield return null;
+    }
+
+    private IEnumerator DisableShardPhysics(GameObject shatter)
+    {
+        yield return new WaitForSeconds(2.5f);
+        foreach (Rigidbody rb in shatter.GetComponentsInChildren<Rigidbody>())
+        {
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
+        }
     }
 
 }
