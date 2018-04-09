@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour
     private Text damageText;
     [SerializeField]
     private Text timerText;
+    [SerializeField]
+    private GameObject leftDoor;
+    [SerializeField]
+    private GameObject rightDoor;
+    [SerializeField]
+    private GameObject elevatorSound;
 
     public static int currentDamages = 0;
     [SerializeField]
@@ -36,11 +42,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Font textFont;
 
+    [SerializeField]
+    private GameObject room1, room2, room3;
+
     public GameObject coinPrefab;
+    [HideInInspector]
     public bool fullSpeed = false;
 
     private bool objectPicked = false;
-    private bool buttonPressed = false;
+    [HideInInspector]
+    public bool buttonPressed = false;
+    [HideInInspector]
+    public bool elevatorButtonPressed = false;
+
+    [HideInInspector]
+    public bool isInRoom2 = true;
+    
     private GameObject pickedObject;
     // Component caching
     private PlayerMotor motor;
@@ -127,7 +144,7 @@ public class PlayerController : MonoBehaviour
     private void PickObject()
     {
         RaycastHit _hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, 3, mask))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, 5, mask))
         {
             if (_hit.collider.tag == "Interactable")
             {
@@ -140,7 +157,15 @@ public class PlayerController : MonoBehaviour
             }
             else if (_hit.collider.tag == "Button" && !buttonPressed)
             {
-                Debug.Log("Button Presed");
+                elevatorSound.GetComponent<AudioSource>().Play();
+                StartCoroutine(leftDoor.GetComponent<ElevatorDoor>().Elevator());
+                StartCoroutine(rightDoor.GetComponent<ElevatorDoor>().Elevator());
+                buttonPressed = true;
+            }
+            else if (_hit.collider.tag == "FloorButton" && !elevatorButtonPressed)
+            {
+                StartCoroutine(InElevator());
+                elevatorButtonPressed = true;
             }
         }
     }
@@ -148,11 +173,16 @@ public class PlayerController : MonoBehaviour
     private void ThrowObject()
     {
         pickedObject.transform.parent = null;
-        objectPicked = false;
         pickedObject.GetComponent<Rigidbody>().useGravity = true;
         pickedObject.GetComponent<Rigidbody>().isKinematic = false;
         pickedObject.GetComponent<ObjectShatter>().isThrown = true;
         pickedObject.GetComponent<Rigidbody>().AddForce(cam.transform.forward * throwPower);
+        Invoke("ObjectPicked", 1.5f);
+    }
+
+    private void ObjectPicked()
+    {
+        objectPicked = false;
     }
 
     public IEnumerator DestroyObject(GameObject current, GameObject shatter)
@@ -163,6 +193,7 @@ public class PlayerController : MonoBehaviour
         {
             PlayerPrefs.SetInt("HighScore", currentDamages);
         }
+        bool finalDoor = current.GetComponent<ObjectShatter>().isFinalDoor;
         current.SetActive(false);
         shatter.SetActive(true);
         shatter.GetComponent<AudioSource>().Play();
@@ -186,6 +217,8 @@ public class PlayerController : MonoBehaviour
         }
         StartCoroutine(DisableShardPhysics(shatter));
         damageText.text = "Damages: $" + currentDamages.ToString();
+        if (finalDoor)
+            SceneManager.LoadScene(4);
         yield return null;
     }
 
@@ -197,6 +230,36 @@ public class PlayerController : MonoBehaviour
             rb.isKinematic = true;
             rb.detectCollisions = false;
         }
+        yield return new WaitForSeconds(1f);
+        int shardCount = shatter.transform.childCount;
+        for (int i = 0; i < shardCount; i+=2)
+        {
+            Destroy(shatter.transform.GetChild(i).gameObject);
+        }
+    }
+
+    private IEnumerator InElevator()
+    {
+        yield return new WaitForSeconds(5f);
+        if (isInRoom2)
+        {
+            room1.SetActive(false);
+            room2.SetActive(false);
+            room3.SetActive(true);
+            isInRoom2 = false;
+        }
+        else
+        {
+            room1.SetActive(true);
+            room2.SetActive(true);
+            room3.SetActive(false);
+            isInRoom2 = true;
+        }
+        yield return new WaitForSeconds(6f);
+        elevatorSound.GetComponent<AudioSource>().Play();
+        StartCoroutine(leftDoor.GetComponent<ElevatorDoor>().Elevator());
+        StartCoroutine(rightDoor.GetComponent<ElevatorDoor>().Elevator());
+        elevatorButtonPressed = false;
     }
 
 }

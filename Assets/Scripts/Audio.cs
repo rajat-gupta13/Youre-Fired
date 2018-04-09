@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Audio : MonoBehaviour {
 
-    [SerializeField]
-    private AudioClip drumstick, song;
+    
+    public AudioClip drumstick, song, elevator;
 
     private AudioSource audioSource;
     private int stickCount = 0;

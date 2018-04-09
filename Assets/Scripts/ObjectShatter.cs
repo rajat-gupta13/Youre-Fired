@@ -10,6 +10,7 @@ public class ObjectShatter : MonoBehaviour {
     public GameObject current, shatter;
     public int damageValue = 50;
 
+    public bool isFinalDoor = false;
     private GameObject player;
     // Use this for initialization
     void Start()
